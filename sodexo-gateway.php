@@ -5,7 +5,7 @@
  * Description: Platební brána Sodexo One pro rozšíření WooCommerce
  * Author: Willi Lazarov
  * Author URI: https://www.willilazarov.cz/
- * Version: 1.0.1
+ * Version: 1.1
  *
  * /
 
@@ -40,7 +40,7 @@ function sodexo_init_gateway_class()
             $this->icon = plugin_dir_url(__FILE__) . 'sodexo.jpg'; // URL of the icon that will be displayed on checkout page near your gateway name
             $this->has_fields = true; // custom form
             $this->method_title = 'Sodexo One'; // payment gateway name
-            $this->method_description = 'Platební brána Sodexo One.'; // payment gateway description
+            $this->method_description = 'Payment gateway Sodexo One.'; // payment gateway description
             // Supported WooCommerce payment by payment gateway
             $this->supports = array(
                 'products'
@@ -67,22 +67,22 @@ function sodexo_init_gateway_class()
 
             $this->form_fields = array(
                 'enabled' => array(
-                    'title' => __('Aktivovat/Deaktivovat', 'woocommerce'),
+                    'title' => __('Activate/Deactivate', 'woocommerce'),
                     'type' => 'checkbox',
-                    'label' => __('Aktivovat kontrolu platby', 'woocommerce'),
+                    'label' => __('Activate payment gateway in checkout page', 'woocommerce'),
                     'default' => 'yes'
                 ),
                 'title' => array(
-                    'title' => __('Název', 'woocommerce'),
+                    'title' => __('Title', 'woocommerce'),
                     'type' => 'text',
-                    'description' => __('Název platební brány, který se zobrazí v možnosti výběru platby', 'woocommerce'),
+                    'description' => __('Title of payment gateway', 'woocommerce'),
                     'default' => __('Sodexo', 'woocommerce'),
                     'desc_tip'      => true,
                 ),
                 'benefit' => array(
                     'title' => __('ID Benefitu', 'woocommerce'),
                     'type' => 'text',
-                    'description' => __('ID Benefitu (skupiny, odpovídající např. jedné hladině DPH)', 'woocommerce'),
+                    'description' => __('Benefit ID', 'woocommerce'),
                     'default' => __('', 'woocommerce'),
                     'desc_tip'      => true,
                 ),
