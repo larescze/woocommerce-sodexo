@@ -8,10 +8,9 @@
 <p>2. Activate plugin in WP Admin</p>
 <p>3. (OPTIONAL) Modify payment gateway url with additional parameters</p>
 <pre>
-$gateway_url =$this->url
+$gateway_url = $this->url
 . '?EShopOrderId=' . $order_id
 . '&BenefitsPrice=' . $this->benefit
 . ':' . $total_amount;
 </pre>
-<p>4. (OPTIONAL) Add custom parameters</p>
-<p>5. Activate Sodexo One in WooCommerce setting</p>
+<p>4. Activate Sodexo One in WooCommerce setting</p>
