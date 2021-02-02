@@ -6,23 +6,9 @@
 <h2>Installation</h2>
 <p>1. Move folder to Wordpress plugins directory</p>
 <p>2. Activate plugin in WP Admin</p>
-<p>3. Change <strong>$process_url</strong> to production or testing URL in function <strong>process_payment</strong></p>
+<p>3. (OPTIONAL) Modify payment gateway url with additional parameters</p>
 <pre>
-public function process_payment($order_id)
-{
-global $woocommerce;
-$order = new WC_Order($order_id);
-$order_id  = $order->get_id();
-$process_url = 'https://brana.sodexo-ucet.cz/?EShopOrderId=';
-
-$total_amount = $woocommerce->cart->cart_contents_total + $woocommerce->cart->tax_total;
-
-return array(
-'result' => 'success',
-'redirect' => $process_url . $order_id . '&BenefitsPrice=' . $this->benefit . ':' . $total_amount
-);
-}
-
+$gateway_url = $this->url . '?EShopOrderId=' . $order_id . '&BenefitsPrice=' . $this->benefit . ':' . $total_amount;
 </pre>
 <p>4. (OPTIONAL) Add custom parameters</p>
 <p>5. Activate Sodexo One in WooCommerce setting</p>
