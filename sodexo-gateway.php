@@ -2,7 +2,7 @@
 /*
  * Plugin Name: WooCommerce Sodexo One Payment Gateway
  * Plugin URI: https://www.willilazarov.cz/
- * Description: Platební brána Sodexo One pro rozšíření WooCommerce
+ * Description: Implementation of Sodexo One Payment Gateway for WooCommerce
  * Author: Willi Lazarov
  * Author URI: https://www.willilazarov.cz/
  * Version: 1.1
@@ -36,11 +36,11 @@ function sodexo_init_gateway_class()
         public function __construct()
         {
 
-            $this->id = 'sodexo'; // payment gateway plugin ID
+            $this->id = 'sodexo'; // Payment gateway plugin ID
             $this->icon = plugin_dir_url(__FILE__) . 'sodexo.jpg'; // URL of the icon that will be displayed on checkout page near your gateway name
-            $this->has_fields = true; // custom form
-            $this->method_title = 'Sodexo One'; // payment gateway name
-            $this->method_description = 'Payment gateway Sodexo One.'; // payment gateway description
+            $this->has_fields = true; // Custom form
+            $this->method_title = 'Sodexo One'; // Payment gateway name
+            $this->method_description = 'Payment gateway Sodexo One.'; // Payment gateway description
             // Supported WooCommerce payment by payment gateway
             $this->supports = array(
                 'products'
@@ -103,14 +103,17 @@ function sodexo_init_gateway_class()
         public function process_payment($order_id)
         {
             global $woocommerce;
+            // WooCommerce order object
             $order = new WC_Order($order_id);
             $order_id  = $order->get_id();
 
             $total_amount = $woocommerce->cart->cart_contents_total + $woocommerce->cart->tax_total;
+            // Prepare payment gateway address to complete the order
+            $gateway_url = $this->url . '?EShopOrderId=' . $order_id . '&BenefitsPrice=' . $this->benefit . ':' . $total_amount;
 
             return array(
                 'result'   => 'success',
-                'redirect' =>  $this->url . $order_id . '&BenefitsPrice=' . $this->benefit . ':' . $total_amount
+                'redirect' =>  $gateway_url,
             );
         }
     }
