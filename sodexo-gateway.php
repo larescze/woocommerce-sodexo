@@ -53,6 +53,7 @@ function sodexo_init_gateway_class()
             $this->init_settings();
             $this->title = $this->get_option('title');
             $this->description = $this->get_option('description');
+            $this->url = $this->get_option('url');
             $this->benefit = $this->get_option('benefit');
             $this->enabled = $this->get_option('enabled');
 
@@ -79,6 +80,13 @@ function sodexo_init_gateway_class()
                     'default' => __('Sodexo', 'woocommerce'),
                     'desc_tip'      => true,
                 ),
+                'url' => array(
+                    'title' => __('Sodexo payment gateway URL', 'woocommerce'),
+                    'type' => 'text',
+                    'description' => __('Sodexo URL', 'woocommerce'),
+                    'default' => __('', 'woocommerce'),
+                    'desc_tip'      => true,
+                ),
                 'benefit' => array(
                     'title' => __('ID Benefitu', 'woocommerce'),
                     'type' => 'text',
@@ -102,7 +110,7 @@ function sodexo_init_gateway_class()
 
             return array(
                 'result'   => 'success',
-                'redirect' =>   'https://brana.sodexo-ucet.cz/?EShopOrderId=' . $order_id . '&BenefitsPrice=' . $this->benefit . ':' . $total_amount
+                'redirect' =>  $this->url . $order_id . '&BenefitsPrice=' . $this->benefit . ':' . $total_amount
             );
         }
     }
